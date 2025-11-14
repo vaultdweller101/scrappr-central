@@ -1,0 +1,6 @@
+[submodule "scrappr"]
+	path = scrappr
+	url = https://github.com/vaultdweller101/scrappr
+[submodule "scrappr-mobile"]
+	path = scrappr-mobile
+	url = https://github.com/vaultdweller101/scrappr-mobile
