@@ -3,9 +3,11 @@
 
 This is the central hub for the Scrappr app family, containing:
 
-- **Original web app**
+- **Original prototype web app, NOT PART OF FINAL IMPLEMENTATION**
 - **Browser extension**
 - **Companion mobile app**
+
+To run the main implementation, please navigate into the browser extension and mobile links, then follow the subsequent instructions to set things up.
 
 ## Cloning and Fetching Submodules
 
