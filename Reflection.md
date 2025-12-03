@@ -27,7 +27,7 @@ This is our final problem statement, where we really honed in on the problem we 
 For our user research, we focused mostly on interviews, although we did utilize other forms of user research like observational studies, contextual inquiries, think-aloud studies, and survey responses. Specifically, we conducted 41 semi-structured interviews, including creative and academic student writers and writing professionals to collect data on what parts of the writing process cause frustration. We conducted 5 contextual inquiries, observing writers for errors or points of time loss. We also collected 149 survey responses.
 
 Here is a pie chart depicting how many tabs survey respondents usually have when they write:  
-![][image1]
+![](assets/pie.png)
 
 The majority of respondents choosing too many was one factor we considered that contributed to our initial “one-platform-has-all” ideology, which has since gotten scrapped, but did inspire the browser extension idea: something built on top of a software that everyone uses with no problem.
 
@@ -89,7 +89,7 @@ Older reasoning (for reference): Different writers had different processes and d
 ---
 
 Our system consists of a browser extension and a mobile app.  
-![][image2]  
+![](assets/architecture.png)  
 Our browser extension is built with the Chrome Manifest V3 Model, and uses the React framework coupled with TypeScript. The dist/ folder, which contains the build and is loaded into the Chrome extension interface, is generated using Vite. It encompasses a popup that opens when you click on the extension icon with all the notes linked to your account, as well as a “continuous popup” that appears on the side of the Google Doc and a button to record voice notes. While the popup is built with the React/TypeScript combination, the continuous popup and the voice button are both associated with content scripts written in JavaScript/TypeScript and don’t use any React functionality.
 
 The sole method of authentication supported by the browser extension is “Sign In With Google”, which is implemented using Firebase’s authentication API. A lot of the significant authentication logic (in order to persist user log in) can be found in background.ts, which is transpiled into background.js. This file acts as a “background service worker”, which runs tasks continuously in the background.
@@ -106,13 +106,13 @@ The extension also has a continuous pop up, which shows up in the same manner as
 
 The voice notes feature is almost entirely handled by the second content script, speech-content.js. It is available as a small button on the right-hand bottom corner of the screen, and it records voice after requesting permission to use the microphone. We used a Google Cloud function coupled with the background service worker (background.ts) to make a secure call to the OpenAI API (so that the API key is never exposed) to transcribe the audio into a note. After this, the note behaves like any other note.
 
-![][image3]  
-![][image4]
+![](assets/extension.png)  
+![](assets/extension-2.png)
 
 Our companion mobile application is built on the Expo framework, utilizing TypeScript for robust development and Firebase for the backend infrastructure. The Notes screen (app/(tabs)/index.tsx) serves as the core user-facing component. Users can seamlessly create new notes via a dedicated modal (modal.tsx), which mirrors the full functionality of the companion extension. Our architecture is further enhanced by custom React hooks, including the familiar useAuth from the browser extension, alongside specialized hooks for dynamic features like color scheme management. The Firebase integration remains consistent at its core, relying on platform-specific configuration files—the GoogleService-Info.plist (iOS) and google-services.json (Android)—to securely manage and provide the necessary credentials for service initialization. As mentioned previously, the entire codebase is enforced using TypeScript, configured via tsconfig.json, which ensures strong type safety, improves developer tooling, and reduces runtime errors across the application.
 
 Mobile development for iOS and Android is starkly different as already demonstrated by the different files required for configuration purposes. To further demonstrate the point, we employed APK signatures to secure and enable direct Android releases on GitHub, but this approach was not viable for iOS, due to its more restrictive provisioning and signing requirements necessary to run test builds on physical devices (as opposed to the simulator).  
-![][image5]
+![](assets/mobile.png)
 
 **Evaluation and Findings**  
 ---
